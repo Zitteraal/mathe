@@ -3,451 +3,386 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wirtschaft: Komplette Lernübersicht</title>
+    <title>Wirtschafts-Klausur: Checkliste</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: #f8fafc;
             color: #334155;
-            line-height: 1.6;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
         }
 
-        /* Box-Design für maximale Lesbarkeit */
-        .content-box {
+        /* Container für Inhalte */
+        .topic-card {
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            margin-bottom: 2rem;
+            border: 1px solid #e2e8f0;
             border-left: 5px solid;
-            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            page-break-inside: avoid;
         }
 
-        .definition-box {
-            background-color: #f1f5f9;
-            border-left: 4px solid #64748b;
+        /* Interaktive Elemente */
+        .flashcard {
+            cursor: pointer;
+            perspective: 1000px;
+            height: 120px;
+        }
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        .flashcard.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+        .flashcard-front, .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 1rem;
-            margin: 1rem 0;
-            font-style: italic;
+            border-radius: 8px;
+            text-align: center;
         }
+        .flashcard-front { background: white; border: 2px solid #e2e8f0; color: #1e293b; font-weight: bold; }
+        .flashcard-back { background: #3b82f6; color: white; transform: rotateY(180deg); font-size: 0.9rem; }
 
-        .example-box {
-            background-color: #ecfdf5;
-            border: 1px solid #a7f3d0;
-            color: #065f46;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.5rem;
-            font-size: 0.9rem;
+        /* Quiz Buttons */
+        .quiz-btn {
+            transition: all 0.2s;
+            text-align: left;
         }
+        .quiz-btn:hover { background-color: #f1f5f9; }
 
-        h2 { font-weight: 700; }
-        h3 { font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem; color: #1e293b; }
-
-        /* Druckoptimierung: Inhalt geht vor Layout-Tricks */
+        /* DRUCK-OPTIMIERUNG (A4 Perfekt) */
         @media print {
-            body { background: white; font-size: 11pt; color: black; }
-            .no-print { display: none !important; }
-            .content-box {
-                box-shadow: none;
-                border: 1px solid #ccc;
-                border-left-width: 5px !important; /* Farbe behalten */
-                break-inside: avoid; /* Versuche Boxen nicht zu trennen */
-                margin-bottom: 1cm;
+            @page { margin: 1.5cm; size: A4; }
+            body { background: white; color: black; font-size: 10.5pt; }
+            
+            /* Alles ausblenden was nicht Lernzettel ist */
+            .no-print, nav, .training-area, footer { display: none !important; }
+            
+            main { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
+            
+            /* Druck-Header sichtbar machen */
+            .print-only { display: block !important; margin-bottom: 0.5cm; border-bottom: 2px solid black; pb-2; }
+            
+            /* Kompaktes Layout */
+            .topic-card {
+                box-shadow: none !important;
+                border: 1px solid #ccc !important;
+                border-left-width: 5px !important;
+                margin-bottom: 0.6cm !important;
             }
-            a { text-decoration: none; color: black; }
-            .bg-slate-800 { background: none !important; color: black !important; border-bottom: 2px solid black; }
+            
+            h2 { font-size: 14pt !important; margin-bottom: 0.2cm !important; }
+            
+            /* Grid für 2 Spalten im Druck */
+            .print-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.8cm;
+            }
+            .print-full-width {
+                grid-column: 1 / -1;
+            }
         }
     </style>
 </head>
-<body class="pb-24">
+<body class="pb-20">
 
     <!-- Navigation -->
-    <nav class="bg-slate-800 text-white p-4 sticky top-0 z-50 no-print shadow-lg">
+    <nav class="bg-slate-900 text-white p-4 sticky top-0 z-50 no-print shadow-lg">
         <div class="max-w-5xl mx-auto flex justify-between items-center">
-            <div class="flex items-center">
-                <i class="fas fa-university text-2xl mr-3 text-yellow-400"></i>
-                <div>
-                    <h1 class="text-xl font-bold">Wirtschaftslehre: Komplett</h1>
-                    <p class="text-xs text-slate-300">Alle Details für die Klausur</p>
-                </div>
+            <div class="font-bold text-lg"><i class="fas fa-check-square text-green-400 mr-2"></i>Checkliste: Wirtschaft</div>
+            <div class="flex gap-3">
+                <a href="#training" class="bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded text-sm font-bold transition">Zum Üben</a>
+                <button onclick="window.print()" class="bg-white text-slate-900 px-3 py-1.5 rounded text-sm font-bold hover:bg-slate-100 transition">
+                    <i class="fas fa-print mr-1"></i> Drucken
+                </button>
             </div>
-            <button onclick="window.print()" class="bg-white text-slate-900 px-4 py-2 rounded font-bold hover:bg-slate-100 transition shadow">
-                <i class="fas fa-print mr-2"></i> Drucken
-            </button>
         </div>
     </nav>
 
     <main class="max-w-5xl mx-auto p-6">
 
-        <!-- Header -->
-        <header class="mb-8 border-b pb-4">
-            <h1 class="text-3xl font-bold text-slate-900">Umfassende Lernzusammenfassung</h1>
-            <p class="text-slate-600 mt-2">Detaillierte Übersicht zu Bedürfnissen, Gütern und ökonomischem Handeln.</p>
-        </header>
+        <!-- Druck-Titel (Nur auf Papier sichtbar) -->
+        <div class="print-only hidden">
+            <h1 class="text-2xl font-bold">Lernzusammenfassung: Wirtschaft</h1>
+            <p class="text-sm">Die 5 Punkte der Checkliste für die Klausur.</p>
+        </div>
 
-        <!-- 1. BEDÜRFNISSE -->
-        <section class="content-box border-blue-600">
-            <div class="p-6">
-                <div class="flex items-center mb-4">
-                    <span class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold mr-3">1</span>
-                    <h2 class="text-2xl text-blue-900">Bedürfnisse, Bedarf & Nachfrage</h2>
-                </div>
+        <!-- LAYOUT START -->
+        <div class="print-grid">
 
-                <div class="definition-box">
-                    <strong>Bedürfnis:</strong> Das subjektive Empfinden eines Mangels, verbunden mit dem Wunsch, diesen zu beheben. Es ist der psychologische Ausgangspunkt allen Wirtschaftens.
-                </div>
-
-                <h3 class="text-lg border-b border-gray-200 pb-1">1.1 Der Prozess der Kaufentscheidung</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 text-center">
-                    <div class="bg-blue-50 p-4 rounded border border-blue-100">
-                        <strong class="block text-blue-800 text-lg mb-1">1. Bedürfnis</strong>
-                        <p class="text-sm text-gray-700">Wunsch/Mangelgefühl</p>
-                        <div class="example-box bg-white border-gray-200 text-gray-600">"Ich will ein Auto."</div>
+            <!-- 1. BEDÜRFNISSE vs. BEDARF -->
+            <div class="topic-card border-blue-500 p-5">
+                <h2 class="text-xl font-bold text-slate-800 mb-3 flex items-center">
+                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mr-2">1</span>
+                    Bedürfnis & Bedarf
+                </h2>
+                
+                <div class="bg-blue-50 p-3 rounded border border-blue-100 mb-3 text-sm">
+                    <div class="flex items-center mb-2">
+                        <div class="w-24 font-bold text-blue-900">1. Bedürfnis</div>
+                        <div class="text-slate-700">Allgemeiner Wunsch ("Hunger").</div>
                     </div>
-                    <div class="bg-blue-50 p-4 rounded border border-blue-100 relative">
-                        <!-- Pfeil -->
-                        <div class="hidden md:block absolute top-1/2 -left-3 transform -translate-y-1/2 bg-blue-200 text-blue-800 rounded-full w-6 h-6 flex items-center justify-center text-xs">➜</div>
-                        <strong class="block text-blue-800 text-lg mb-1">2. Bedarf</strong>
-                        <p class="text-sm text-gray-700">Bedürfnis + <strong>Kaufkraft</strong></p>
-                        <div class="example-box bg-white border-gray-200 text-gray-600">"Ich habe 20.000€."</div>
+                    <div class="flex items-center mb-2">
+                        <div class="w-24 font-bold text-blue-900">2. Bedarf</div>
+                        <div class="text-slate-700">Bedürfnis + <strong>Kaufkraft</strong> (Geld).</div>
                     </div>
-                    <div class="bg-blue-50 p-4 rounded border border-blue-100 relative">
-                        <div class="hidden md:block absolute top-1/2 -left-3 transform -translate-y-1/2 bg-blue-200 text-blue-800 rounded-full w-6 h-6 flex items-center justify-center text-xs">➜</div>
-                        <strong class="block text-blue-800 text-lg mb-1">3. Nachfrage</strong>
-                        <p class="text-sm text-gray-700">Marktwirksamkeit</p>
-                        <div class="example-box bg-white border-gray-200 text-gray-600">"Ich kaufe das Auto beim Händler."</div>
+                    <div class="flex items-center">
+                        <div class="w-24 font-bold text-blue-900">3. Nachfrage</div>
+                        <div class="text-slate-700">Kauf findet am Markt statt.</div>
                     </div>
                 </div>
+            </div>
 
-                <h3 class="text-lg border-b border-gray-200 pb-1 mt-6">1.2 Einteilung der Bedürfnisse (Detail)</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                    <!-- Nach Dringlichkeit -->
+            <!-- 2. BEDÜRFNISPYRAMIDE -->
+            <div class="topic-card border-yellow-500 p-5">
+                <h2 class="text-xl font-bold text-slate-800 mb-3 flex items-center">
+                    <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded mr-2">2</span>
+                    Maslow Pyramide
+                </h2>
+                
+                <div class="text-sm space-y-1">
+                    <div class="bg-purple-100 p-1.5 rounded text-center font-bold text-purple-900 border border-purple-200">
+                        5. Selbstverwirklichung <span class="text-xs font-normal block">(Wachstumsbedürfnis: Nie gesättigt)</span>
+                    </div>
+                    <div class="bg-red-100 p-1.5 rounded text-center font-bold text-red-900 border border-red-200 w-[95%] mx-auto">
+                        4. Ich-Bedürfnisse (Individualbedürfnisse)
+                    </div>
+                    <div class="bg-yellow-100 p-1.5 rounded text-center font-bold text-yellow-900 border border-yellow-200 w-[90%] mx-auto">
+                        3. Soziale Bedürfnisse
+                    </div>
+                    <div class="bg-green-100 p-1.5 rounded text-center font-bold text-green-900 border border-green-200 w-[85%] mx-auto">
+                        2. Sicherheitsbedürfnisse
+                    </div>
+                    <div class="bg-blue-100 p-1.5 rounded text-center font-bold text-blue-900 border border-blue-200 w-[80%] mx-auto">
+                        1. Physiologische Bed. (Essen/Schlaf)
+                    </div>
+                    <p class="text-xs text-center text-slate-500 mt-1">Stufen 1-4 sind <strong>Defizitbedürfnisse</strong> (Mangel beseitigen).</p>
+                </div>
+            </div>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <!-- 3. GÜTERARTEN -->
+            <div class="topic-card border-green-600 p-5 print-full-width">
+                <h2 class="text-xl font-bold text-slate-800 mb-3 flex items-center">
+                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded mr-2">3</span>
+                    Güterarten
+                </h2>
+                
+                <div class="flex gap-4 mb-3 text-sm">
+                    <div class="flex-1 bg-green-50 p-2 rounded border border-green-200 text-center">
+                        <strong>Freie Güter</strong><br>
+                        <span class="text-slate-600 text-xs">Unbegrenzt, kostenlos (Sonne, Luft)</span>
+                    </div>
+                    <div class="flex-1 bg-gray-100 p-2 rounded border border-gray-200 text-center">
+                        <strong>Wirtschaftl. Güter</strong><br>
+                        <span class="text-slate-600 text-xs">Knapp, kosten Geld</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 text-sm">
                     <div>
-                        <h4 class="font-bold text-gray-700 mb-2">A. Nach Dringlichkeit</h4>
-                        <ul class="list-disc pl-5 space-y-2 text-sm">
-                            <li><strong>Existenzbedürfnisse (Primärbedürfnisse):</strong> Lebensnotwendig. Mangel bedroht das Leben.
-                                <br><span class="text-gray-500 italic">Bsp: Nahrung, Kleidung, Unterkunft, Notfallmedizin.</span>
-                            </li>
-                            <li><strong>Kulturbedürfnisse (Sekundärbedürfnisse):</strong> Entstehen durch kulturelles und soziales Umfeld. "Normaler" Lebensstandard.
-                                <br><span class="text-gray-500 italic">Bsp: Schulbildung, Smartphone, Kinobesuch, Reisen.</span>
-                            </li>
-                            <li><strong>Luxusbedürfnisse:</strong> Gehen über den Standard hinaus. Verzichtbar, oft Statussymbol.
-                                <br><span class="text-gray-500 italic">Bsp: Luxusyacht, Champagner, Designer-Handtasche.</span>
-                            </li>
+                        <strong class="text-slate-700 block mb-1">Nach Beschaffenheit</strong>
+                        <ul class="list-disc pl-4 text-slate-600 text-xs">
+                            <li>Sachgüter (Auto)</li>
+                            <li>Dienstleistungen (Friseur)</li>
                         </ul>
                     </div>
-                    <!-- Nach Träger / Bewusstheit -->
                     <div>
-                        <h4 class="font-bold text-gray-700 mb-2">B. Nach Träger (Wer hat den Wunsch?)</h4>
-                        <ul class="list-disc pl-5 space-y-2 text-sm mb-4">
-                            <li><strong>Individualbedürfnisse:</strong> Können vom Einzelnen allein befriedigt werden.
-                                <br><span class="text-gray-500 italic">Bsp: Kauf eines Buches.</span>
-                            </li>
-                            <li><strong>Kollektivbedürfnisse:</strong> Können nur durch die Gemeinschaft (Staat/Gruppe) befriedigt werden.
-                                <br><span class="text-gray-500 italic">Bsp: Innere Sicherheit (Polizei), saubere Umwelt, Verkehrsinfrastruktur.</span>
-                            </li>
+                        <strong class="text-slate-700 block mb-1">Nach Verwendung</strong>
+                        <ul class="list-disc pl-4 text-slate-600 text-xs">
+                            <li>Konsumgüter (Privat)</li>
+                            <li>Produktionsgüter (Firma)</li>
                         </ul>
-                        
-                        <h4 class="font-bold text-gray-700 mb-2">C. Nach Bewusstheit (Zusatzwissen)</h4>
-                        <ul class="list-disc pl-5 space-y-2 text-sm">
-                            <li><strong>Offene Bedürfnisse:</strong> Sind dem Menschen bewusst.</li>
-                            <li><strong>Latente Bedürfnisse:</strong> Schlummern im Unterbewusstsein, werden erst durch Werbung oder Umweltreize geweckt.</li>
+                    </div>
+                    <div>
+                        <strong class="text-slate-700 block mb-1">Nach Nutzungsdauer</strong>
+                        <ul class="list-disc pl-4 text-slate-600 text-xs">
+                            <li>Gebrauchsgüter (Mehrmals)</li>
+                            <li>Verbrauchsgüter (Einmal)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="text-slate-700 block mb-1">Beziehung (Extra)</strong>
+                        <ul class="list-disc pl-4 text-slate-600 text-xs">
+                            <li>Substitutionsgüter (Butter/Margarine)</li>
+                            <li>Komplementärgüter (Auto/Benzin)</li>
                         </ul>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- 2. MASLOW -->
-        <section class="content-box border-yellow-500">
-            <div class="p-6">
-                <div class="flex items-center mb-4">
-                    <span class="bg-yellow-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold mr-3">2</span>
-                    <h2 class="text-2xl text-yellow-900">Bedürfnispyramide nach Maslow</h2>
-                </div>
-
-                <p class="mb-4 text-sm text-gray-600">Abraham Maslow (1943) ordnete menschliche Motivationen hierarchisch. Grundregel: Erst wenn eine Stufe weitgehend erfüllt ist, aktiviert sich die nächsthöhere Stufe.</p>
-
-                <div class="flex flex-col-reverse space-y-1 space-y-reverse max-w-2xl mx-auto mb-6">
-                    <!-- Stufe 5 -->
-                    <div class="bg-purple-100 border border-purple-300 p-3 rounded text-center relative">
-                        <span class="absolute left-2 top-2 text-xs font-bold text-purple-800">5.</span>
-                        <strong class="text-purple-900">Selbstverwirklichung</strong>
-                        <p class="text-xs text-purple-700">Potenzial entfalten, Kreativität, Sinnfindung.</p>
-                        <span class="absolute right-[-140px] top-2 text-xs font-bold text-purple-600 hidden md:block">⬅ Wachstumsbedürfnis</span>
+            <!-- 4. ÖKONOMISCHES PRINZIP -->
+            <div class="topic-card border-indigo-600 p-5">
+                <h2 class="text-xl font-bold text-slate-800 mb-3 flex items-center">
+                    <span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded mr-2">4</span>
+                    Ökonomisches Prinzip
+                </h2>
+                
+                <div class="space-y-3">
+                    <div class="border rounded p-3 text-sm bg-indigo-50/50">
+                        <strong class="text-indigo-800">Maximalprinzip</strong>
+                        <div class="text-xs font-mono bg-white inline-block px-1 border rounded my-1">Mittel fest ➔ Ziel max</div>
+                        <p class="text-slate-600 text-xs">Mit 50€ (fest) so viel tanken wie möglich.</p>
                     </div>
-                    <!-- Stufe 4 -->
-                    <div class="bg-red-100 border border-red-300 p-3 rounded text-center relative w-[90%] mx-auto">
-                        <span class="absolute left-2 top-2 text-xs font-bold text-red-800">4.</span>
-                        <strong class="text-red-900">Ich-Bedürfnisse (Wertschätzung)</strong>
-                        <p class="text-xs text-red-700">Anerkennung, Status, Macht, Erfolg, Prestige.</p>
-                        <span class="absolute right-[-140px] top-2 text-xs font-bold text-red-600 hidden md:block">⬅ Defizitbedürfnis</span>
+                    <div class="border rounded p-3 text-sm bg-indigo-50/50">
+                        <strong class="text-indigo-800">Minimalprinzip</strong>
+                        <div class="text-xs font-mono bg-white inline-block px-1 border rounded my-1">Ziel fest ➔ Mittel min</div>
+                        <p class="text-slate-600 text-xs">Nach Berlin (fest) mit wenig Sprit fahren.</p>
                     </div>
-                    <!-- Stufe 3 -->
-                    <div class="bg-yellow-100 border border-yellow-300 p-3 rounded text-center relative w-[95%] mx-auto">
-                        <span class="absolute left-2 top-2 text-xs font-bold text-yellow-800">3.</span>
-                        <strong class="text-yellow-900">Soziale Bedürfnisse</strong>
-                        <p class="text-xs text-yellow-700">Zugehörigkeit, Liebe, Freundschaft, Kommunikation.</p>
-                        <span class="absolute right-[-140px] top-2 text-xs font-bold text-yellow-600 hidden md:block">⬅ Defizitbedürfnis</span>
-                    </div>
-                    <!-- Stufe 2 -->
-                    <div class="bg-green-100 border border-green-300 p-3 rounded text-center relative w-[100%] mx-auto">
-                        <span class="absolute left-2 top-2 text-xs font-bold text-green-800">2.</span>
-                        <strong class="text-green-900">Sicherheitsbedürfnisse</strong>
-                        <p class="text-xs text-green-700">Schutz vor Gefahr, Arbeitsplatzsicherheit, Gesundheit, Ordnung, Gesetze.</p>
-                        <span class="absolute right-[-140px] top-2 text-xs font-bold text-green-600 hidden md:block">⬅ Defizitbedürfnis</span>
-                    </div>
-                    <!-- Stufe 1 -->
-                    <div class="bg-blue-100 border border-blue-300 p-3 rounded text-center relative w-[100%] mx-auto">
-                        <span class="absolute left-2 top-2 text-xs font-bold text-blue-800">1.</span>
-                        <strong class="text-blue-900">Physiologische Bedürfnisse</strong>
-                        <p class="text-xs text-blue-700">Essen, Trinken, Schlaf, Wärme, Sexualität (Arterhaltung).</p>
-                        <span class="absolute right-[-140px] top-2 text-xs font-bold text-blue-600 hidden md:block">⬅ Defizitbedürfnis</span>
+                    <div class="text-xs text-red-600 font-bold bg-red-50 p-2 rounded text-center">
+                        <i class="fas fa-exclamation-triangle"></i> Nicht beides gleichzeitig!
                     </div>
                 </div>
+            </div>
 
-                <div class="bg-gray-50 border p-4 rounded text-sm">
-                    <h4 class="font-bold text-gray-800 mb-2">Wichtige Unterscheidung:</h4>
-                    <ul class="list-disc pl-5">
-                        <li class="mb-2"><strong>Defizitbedürfnisse (Stufe 1-4):</strong> Müssen erfüllt sein, um physische oder psychische Krankheit zu vermeiden. Die Motivation sinkt, sobald das Bedürfnis befriedigt ist (Sättigungseffekt).</li>
-                        <li><strong>Wachstumsbedürfnisse (Stufe 5):</strong> Sind prinzipiell unstillbar. Die Befriedigung führt zu neuer Motivation (z.B. Klavier lernen -> man will immer besser werden).</li>
+            <!-- 5. OPPORTUNITÄTSKOSTEN -->
+            <div class="topic-card border-red-600 p-5">
+                <h2 class="text-xl font-bold text-slate-800 mb-3 flex items-center">
+                    <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded mr-2">5</span>
+                    Opportunitätskosten
+                </h2>
+                
+                <div class="bg-red-50 p-2 rounded text-sm text-red-900 mb-3 border border-red-100">
+                    <strong>Definition:</strong> Der entgangene Nutzen der <u>nicht gewählten</u> Alternative. ("Verzichtskosten")
+                </div>
+
+                <div class="text-sm">
+                    <p class="font-bold text-slate-700">Beispiel:</p>
+                    <ul class="list-none text-xs space-y-1 mt-1 text-slate-600">
+                        <li><i class="fas fa-check text-green-500 w-4"></i> Wahl: Kino (15€ Kosten)</li>
+                        <li><i class="fas fa-times text-red-500 w-4"></i> Verzicht: Babysitten (20€ Lohn)</li>
                     </ul>
+                    <p class="mt-2 text-xs bg-slate-100 p-2 rounded">
+                        <strong>Kosten:</strong> 20€ (Verzicht) + 15€ (Ticket)
+                    </p>
                 </div>
             </div>
-        </section>
-<br><br><br><br><br><br><br>
-        <!-- 3. GÜTER -->
-        <section class="content-box border-green-600">
-            <div class="p-6">
-                <div class="flex items-center mb-4">
-                    <span class="bg-green-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold mr-3">3</span>
-                    <h2 class="text-2xl text-green-900">Güterarten</h2>
-                </div>
 
+        </div> 
+        <!-- ENDE DRUCK-LAYOUT -->
+
+
+        <!-- 
+        ========================================
+        INTERAKTIVES TRAINING (NICHT DRUCKBAR)
+        ======================================== 
+        -->
+        <div id="training" class="training-area mt-12 border-t-4 border-dashed border-slate-300 pt-8 no-print">
+            
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-slate-800">Training Center</h2>
+                <p class="text-slate-500">Prüfe, ob du die 5 Punkte kannst.</p>
+            </div>
+
+            <!-- 1. Flashcards -->
+            <div class="mb-12">
+                <h3 class="font-bold text-lg mb-4 text-slate-700"><i class="fas fa-bolt text-yellow-500 mr-2"></i>Begriffe lernen (Klick zum Umdrehen)</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- Karte 1 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">Was ist Kaufkraft?</div>
+                            <div class="flashcard-back">Die Fähigkeit, Güter mit Geld zu erwerben.<br>(Macht aus Bedürfnis -> Bedarf)</div>
+                        </div>
+                    </div>
+                    <!-- Karte 2 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">Defizitbedürfnisse</div>
+                            <div class="flashcard-back">Stufe 1-4 (Maslow).<br>Müssen erfüllt sein, um Mangel zu beseitigen.</div>
+                        </div>
+                    </div>
+                    <!-- Karte 3 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">Investitionsgüter</div>
+                            <div class="flashcard-back">Güter, die Unternehmen zur Produktion nutzen.<br>(Maschinen, Rohstoffe)</div>
+                        </div>
+                    </div>
+                    <!-- Karte 4 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">Maximalprinzip</div>
+                            <div class="flashcard-back">Mittel fest ➔ Ziel maximal.<br>(50€ Tanken ➔ Weit kommen)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Quiz -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border border-slate-200">
+                <h3 class="font-bold text-lg mb-6 text-slate-700"><i class="fas fa-question-circle text-blue-500 mr-2"></i>Checklisten-Quiz</h3>
+                
+                <!-- Frage 1 -->
                 <div class="mb-6">
-                    <h3 class="font-bold text-lg mb-2">3.1 Grundlegende Unterscheidung</h3>
-                    <div class="flex flex-col md:flex-row gap-4">
-                        <div class="flex-1 bg-green-50 p-4 border border-green-200 rounded">
-                            <strong class="text-green-800">Freie Güter</strong>
-                            <ul class="text-sm mt-2 list-disc pl-4">
-                                <li>Nahezu unbegrenzt vorhanden.</li>
-                                <li>Haben keinen Preis.</li>
-                                <li>Kein Eigentum möglich.</li>
-                                <li><em>Bsp: Luft, Sonnenlicht, Meerwasser, Wüstensand.</em></li>
-                            </ul>
-                        </div>
-                        <div class="flex-1 bg-gray-100 p-4 border border-gray-300 rounded">
-                            <strong class="text-gray-800">Wirtschaftliche Güter</strong>
-                            <ul class="text-sm mt-2 list-disc pl-4">
-                                <li>Sind <strong>knapp</strong> im Verhältnis zum Bedarf.</li>
-                                <li>Haben einen Preis.</li>
-                                <li>Verursachen Kosten bei Herstellung/Bereitstellung.</li>
-                                <li>Sind handelbar.</li>
-                            </ul>
-                        </div>
+                    <p class="font-bold text-slate-800 mb-2">1. Ein LKW-Fahrer muss 500km fahren (Ziel) und will wenig Diesel verbrauchen.</p>
+                    <div class="space-y-2">
+                        <button onclick="check(this, false)" class="quiz-btn w-full p-3 rounded border hover:bg-slate-50">A) Maximalprinzip</button>
+                        <button onclick="check(this, true)" class="quiz-btn w-full p-3 rounded border hover:bg-slate-50">B) Minimalprinzip</button>
                     </div>
                 </div>
 
-                <h3 class="font-bold text-lg mb-2">3.2 Systematisierung Wirtschaftlicher Güter</h3>
-                <table class="w-full text-sm border-collapse mb-6">
-                    <tr class="bg-gray-200">
-                        <th class="p-3 border text-left w-1/4">Kriterium</th>
-                        <th class="p-3 border text-left">Unterscheidung & Erklärung</th>
-                    </tr>
-                    <!-- Beschaffenheit -->
-                    <tr>
-                        <td class="p-3 border font-bold bg-gray-50">Nach Beschaffenheit</td>
-                        <td class="p-3 border">
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <strong class="text-gray-800">Sachgüter (Materiell)</strong><br>
-                                    Körperliche Gegenstände.<br>
-                                    <span class="text-gray-500 italic">Auto, Tisch, Brot.</span>
-                                </div>
-                                <div>
-                                    <strong class="text-gray-800">Immaterielle Güter</strong><br>
-                                    Nicht gegenständlich.<br>
-                                    <span class="text-gray-500 italic">Dienstleistungen (Arzt), Rechte (Patente, Lizenzen).</span>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <!-- Verwendung -->
-                    <tr>
-                        <td class="p-3 border font-bold bg-gray-50">Nach Verwendung</td>
-                        <td class="p-3 border">
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <strong class="text-gray-800">Konsumgüter</strong><br>
-                                    Dienen der unmittelbaren Bedürfnisbefriedigung des Endverbrauchers (Haushalte).
-                                </div>
-                                <div>
-                                    <strong class="text-gray-800">Produktionsgüter</strong><br>
-                                    Dienen der Herstellung anderer Güter (Unternehmen). Auch Investitionsgüter genannt.
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <!-- Nutzungsdauer -->
-                    <tr>
-                        <td class="p-3 border font-bold bg-gray-50">Nach Nutzungsdauer</td>
-                        <td class="p-3 border">
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <strong class="text-gray-800">Gebrauchsgüter</strong><br>
-                                    Mehrmalige Nutzung über längeren Zeitraum.<br>
-                                    <span class="text-gray-500 italic">Kleidung, Möbel, Maschinen.</span>
-                                </div>
-                                <div>
-                                    <strong class="text-gray-800">Verbrauchsgüter</strong><br>
-                                    Gehen bei Nutzung unter oder verwandeln sich.<br>
-                                    <span class="text-gray-500 italic">Nahrung, Benzin, Rohstoffe, Strom.</span>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <!-- Beziehung -->
-                    <tr>
-                        <td class="p-3 border font-bold bg-gray-50">Nach Beziehung zueinander</td>
-                        <td class="p-3 border">
-                            <ul class="list-disc pl-4 space-y-2">
-                                <li><strong>Substitutionsgüter:</strong> Güter, die sich gegenseitig ersetzen können (austauschbar).
-                                    <br><span class="text-gray-500 italic">Butter ↔ Margarine; Bahn ↔ Auto.</span>
-                                </li>
-                                <li><strong>Komplementärgüter:</strong> Güter, die sich ergänzen und nur zusammen sinnvoll genutzt werden können.
-                                    <br><span class="text-gray-500 italic">Auto + Benzin; Hardware + Software.</span>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <!-- Nachfrageverhalten (Profi-Wissen) -->
-                    <tr>
-                        <td class="p-3 border font-bold bg-gray-50">Nach Einkommensabhängigkeit (Extra)</td>
-                        <td class="p-3 border">
-                            <ul class="list-disc pl-4">
-                                <li><strong>Superiore Güter:</strong> Nachfrage steigt überproportional bei steigendem Einkommen (z.B. Luxusreisen).</li>
-                                <li><strong>Inferiore Güter:</strong> Nachfrage sinkt bei steigendem Einkommen, weil man auf bessere Güter umsteigt (z.B. Dosenfleisch wird durch frisches Steak ersetzt).</li>
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
+                <!-- Frage 2 -->
+                <div class="mb-6">
+                    <p class="font-bold text-slate-800 mb-2">2. Welches Gut ist ein "Komplementärgut" zum Drucker?</p>
+                    <div class="space-y-2">
+                        <button onclick="check(this, false)" class="quiz-btn w-full p-3 rounded border hover:bg-slate-50">A) Ein anderer Drucker (Ersatz)</button>
+                        <button onclick="check(this, true)" class="quiz-btn w-full p-3 rounded border hover:bg-slate-50">B) Druckerpatronen (Ergänzung)</button>
+                    </div>
+                </div>
+
+                <!-- Frage 3 -->
+                <div>
+                    <p class="font-bold text-slate-800 mb-2">3. Du lernst für die Klausur, statt für 20€ Rasen zu mähen. Wie hoch sind die Opportunitätskosten?</p>
+                    <div class="space-y-2">
+                        <button onclick="check(this, true)" class="quiz-btn w-full p-3 rounded border hover:bg-slate-50">A) 20€ (der entgangene Lohn)</button>
+                        <button onclick="check(this, false)" class="quiz-btn w-full p-3 rounded border hover:bg-slate-50">B) 0€ (Lernen kostet nichts)</button>
+                    </div>
+                </div>
+
             </div>
-        </section>
-
-        <!-- 4. ÖKONOMISCHES PRINZIP -->
-        <section class="content-box border-indigo-600">
-            <div class="p-6">
-                <div class="flex items-center mb-4">
-                    <span class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold mr-3">4</span>
-                    <h2 class="text-2xl text-indigo-900">Das Ökonomische Prinzip</h2>
-                </div>
-
-                <div class="definition-box bg-indigo-50 border-indigo-300">
-                    <strong>Hintergrund:</strong> Knappheit der Güter vs. Unbegrenztheit der Bedürfnisse. Das Handeln nach dem ökonomischen Prinzip nennt man <strong>rationales Handeln</strong> (Homo Oeconomicus).
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-                    <!-- Maximal -->
-                    <div class="border rounded p-4 shadow-sm hover:shadow-md transition">
-                        <h4 class="font-bold text-indigo-700 text-lg mb-2">A. Maximalprinzip</h4>
-                        <div class="bg-gray-100 p-2 text-center font-mono text-sm mb-3 font-bold rounded">
-                            MITTEL (fest) ➔ ERTRAG (max)
-                        </div>
-                        <p class="text-sm">Mit gegebenen Mitteln soll der größtmögliche Erfolg erzielt werden.</p>
-                        <div class="example-box">
-                            <strong>Bsp:</strong> Ein LKW-Fahrer hat 50 Liter Diesel (fest) und will so viele Kilometer wie möglich fahren.
-                        </div>
-                    </div>
-
-                    <!-- Minimal -->
-                    <div class="border rounded p-4 shadow-sm hover:shadow-md transition">
-                        <h4 class="font-bold text-indigo-700 text-lg mb-2">B. Minimalprinzip</h4>
-                        <div class="bg-gray-100 p-2 text-center font-mono text-sm mb-3 font-bold rounded">
-                            ZIEL (fest) ➔ MITTEL (min)
-                        </div>
-                        <p class="text-sm">Ein festgelegtes Ziel soll mit geringstem Mitteleinsatz erreicht werden.</p>
-                        <div class="example-box">
-                            <strong>Bsp:</strong> Ein LKW-Fahrer muss 500km nach München fahren (fest) und will dabei so wenig Diesel wie möglich verbrauchen.
-                        </div>
-                    </div>
-
-                    <!-- Optimum -->
-                    <div class="border rounded p-4 shadow-sm hover:shadow-md transition bg-indigo-50/50">
-                        <h4 class="font-bold text-indigo-700 text-lg mb-2">C. Extremumprinzip</h4>
-                        <div class="bg-gray-100 p-2 text-center font-mono text-sm mb-3 font-bold rounded">
-                            INPUT ↔ OUTPUT (optimum)
-                        </div>
-                        <p class="text-sm">Sonderform (Optimumprinzip): Weder Mittel noch Ziel sind fest fixiert. Es soll das bestmögliche Verhältnis zwischen Einsatz und Ertrag gefunden werden.</p>
-                        <div class="example-box">
-                            <strong>Bsp:</strong> Möglichst billig einkaufen für möglichst gute Qualität (Preis-Leistungs-Verhältnis).
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-4 p-3 bg-red-50 text-red-800 text-sm border-l-4 border-red-500">
-                    <strong>Achtung Logikfehler:</strong> Das "Max-Min-Prinzip" (Mit minimalem Aufwand maximalen Ertrag) ist unmöglich! Man kann nicht zwei Variablen gleichzeitig in entgegengesetzte Richtungen optimieren.
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. OPPORTUNITÄTSKOSTEN -->
-        <section class="content-box border-red-600">
-            <div class="p-6">
-                <div class="flex items-center mb-4">
-                    <span class="bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold mr-3">5</span>
-                    <h2 class="text-2xl text-red-900">Opportunitätskosten</h2>
-                </div>
-
-                <p class="mb-4">Da Ressourcen knapp sind, müssen wir wählen. Jede Wahl bedeutet einen Verzicht.</p>
-
-                <div class="definition-box bg-red-50 border-red-300">
-                    <strong>Definition:</strong> Opportunitätskosten (Alternativkosten) sind der entgangene Nutzen (Ertrag/Gewinn) der besten Alternative, auf die zugunsten einer anderen Handlung verzichtet wurde.
-                </div>
-
-                <div class="overflow-x-auto mt-4">
-                    <table class="w-full text-sm">
-                        <thead class="bg-gray-100 text-gray-700">
-                            <tr>
-                                <th class="p-2 text-left">Szenario</th>
-                                <th class="p-2 text-left">Entscheidung A (Gewählt)</th>
-                                <th class="p-2 text-left">Entscheidung B (Verzicht)</th>
-                                <th class="p-2 text-left font-bold text-red-600">Opportunitätskosten</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-200">
-                            <tr>
-                                <td class="p-2 font-bold">Investition</td>
-                                <td class="p-2">Maschine kaufen für 100.000€</td>
-                                <td class="p-2">Geld bei der Bank anlegen (3% Zinsen)</td>
-                                <td class="p-2 bg-red-50 text-red-800">3.000€ (die entgangenen Zinsen)</td>
-                            </tr>
-                            <tr>
-                                <td class="p-2 font-bold">Arbeitsmarkt</td>
-                                <td class="p-2">Selbstständig machen</td>
-                                <td class="p-2">Angestellt bleiben (Gehalt: 3.000€)</td>
-                                <td class="p-2 bg-red-50 text-red-800">3.000€ (das entgangene Gehalt)</td>
-                            </tr>
-                            <tr>
-                                <td class="p-2 font-bold">Freizeit</td>
-                                <td class="p-2">Lernen für Klausur</td>
-                                <td class="p-2">Kinoabend mit Freunden</td>
-                                <td class="p-2 bg-red-50 text-red-800">Der Spaß/Erholung im Kino</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <footer class="text-center text-gray-500 text-sm mt-12 no-print">
-            <p>Viel Erfolg bei der Klausur! 🍀</p>
-        </footer>
+        </div>
 
     </main>
 
+    <footer class="text-center text-slate-400 py-8 no-print text-sm">
+        Viel Erfolg für morgen! 🍀
+    </footer>
+
+    <script>
+        function check(btn, isCorrect) {
+            const parent = btn.parentElement;
+            const buttons = parent.getElementsByTagName('button');
+            for(let b of buttons) {
+                b.disabled = true;
+                if(b !== btn) b.style.opacity = '0.5';
+            }
+            if(isCorrect) {
+                btn.classList.add('bg-green-100', 'border-green-500', 'text-green-800', 'font-bold');
+                btn.innerHTML += ' <i class="fas fa-check ml-2"></i>';
+            } else {
+                btn.classList.add('bg-red-100', 'border-red-500', 'text-red-800');
+                btn.innerHTML += ' <i class="fas fa-times ml-2"></i>';
+            }
+        }
+    </script>
 </body>
 </html>
