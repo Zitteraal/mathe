@@ -3,434 +3,401 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mathe Klausur Nr. 2</title>
+    <title>Wirtschaft Lernzettel - Ausführlich</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        :root {
-            --primary: #1e3a8a; /* Dunkelblau */
-            --accent: #d97706; /* Bernstein */
-            --bg: #f3f4f6;
-            --text: #1f2937;
-            --paper: #ffffff;
-            --success: #059669;
-            --danger: #dc2626;
-        }
-
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            background-color: var(--bg);
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: var(--paper);
-            padding: 50px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-
-        /* Überschriften */
-        h1 {
-            color: var(--primary);
-            border-bottom: 4px solid var(--accent);
-            padding-bottom: 15px;
-            text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 30px;
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+            -webkit-print-color-adjust: exact;
         }
 
         h2 {
-            background-color: var(--primary);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 4px;
-            margin-top: 50px;
-            font-size: 1.5em;
-            break-after: avoid; 
+            page-break-after: avoid;
+        }
+        
+        section {
+            page-break-inside: avoid;
+            margin-bottom: 2rem;
         }
 
-        h3 {
-            color: var(--primary);
-            border-left: 5px solid var(--accent);
-            padding-left: 10px;
-            margin-top: 40px;
-            break-after: avoid;
-        }
-
-        p {
-            margin-bottom: 15px;
-        }
-
-        /* Boxen und Tipps */
-        .box {
-            background-color: #eff6ff;
-            border: 2px solid #bfdbfe;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-            break-inside: avoid;
-        }
-
-        .achtung {
-            background-color: #fef2f2;
-            border: 2px solid #fecaca;
-            border-left: 5px solid var(--danger);
-            color: #991b1b;
-            padding: 15px;
-            border-radius: 4px;
-            margin: 20px 0;
-            break-inside: avoid;
-        }
-
-        .tipp {
-            background-color: #fffbeb;
-            border: 2px solid #fde68a;
-            color: #92400e;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-            position: relative;
-            break-inside: avoid;
-        }
-        .tipp::before {
-            content: "💡 TIPP:";
-            font-weight: bold;
-            margin-right: 5px;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        /* Mathe-Darstellung */
-        .math {
-            font-family: 'Georgia', serif;
-            font-style: italic;
-            background-color: #f3f4f6;
-            padding: 2px 6px;
-            border-radius: 4px;
-            display: inline-block;
-        }
-
-        .math-block {
-            display: block;
-            background-color: #1f2937;
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            margin: 15px 0;
-            white-space: pre-wrap;
-            font-style: normal;
-            border-left: 5px solid var(--accent);
-            break-inside: avoid;
-        }
-
-        /* Tabellen */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 25px 0;
-            break-inside: avoid;
-        }
-        th, td {
-            border: 1px solid #e5e7eb;
-            padding: 12px;
-            text-align: left;
-        }
-        th {
-            background-color: #f9fafb;
-            font-weight: bold;
-            color: var(--primary);
-        }
-
-        /* NEU Regel Tabelle */
-        .new-table td {
-            border: none;
-            padding: 5px;
-        }
-        .new-letter {
-            font-weight: bold;
-            font-size: 1.5em;
-            color: var(--accent);
-            width: 30px;
-            display: inline-block;
-            text-align: center;
-        }
-
-        /* Druck-Button */
-        .print-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.1em;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            transition: transform 0.2s;
-            z-index: 1000;
-        }
-        .print-btn:hover {
-            transform: scale(1.05);
-            background: #b45309;
-        }
-
-        /* Druck-Optimierung */
+        /* Druck-Spezifisches */
         @media print {
-            body { 
-                background: white; 
-                padding: 0; 
-                font-size: 11pt;
-                color: black;
+            .no-print { display: none !important; }
+            body { background-color: white; }
+            main { padding: 0 !important; max-width: 100% !important; }
+            section { 
+                box-shadow: none !important; 
+                border: 1px solid #ddd !important;
+                margin-bottom: 1cm;
             }
-            .container { 
-                box-shadow: none; 
-                padding: 0; 
-                width: 100%; 
-                max-width: 100%; 
-                margin: 0;
-            }
-            .print-btn { display: none; }
-            h1 { font-size: 2em; margin-bottom: 10px; }
-            h2 { 
-                background: white; 
-                color: black; 
-                border-bottom: 2px solid black; 
-                padding: 5px 0;
-                margin-top: 30px;
-            }
-            h3 {
-                color: black;
-                border-left: 3px solid black;
-                margin-top: 20px;
-            }
-            .math-block { 
-                background: #f8f9fa; 
-                color: black; 
-                border: 1px solid #aaa; 
-            }
-            .box, .achtung, .tipp {
-                border: 1px solid #000;
-                color: black;
-                background: white !important;
-            }
-            a { text-decoration: none; color: black; }
+            .page-break { page-break-before: always; }
         }
     </style>
 </head>
-<body>
+<body class="pb-20">
 
-    <button class="print-btn" onclick="window.print()">🖨️ Jetzt ausdrucken</button>
-
-    <div class="container">
-        <h1>Mathe-Lernskript</h1>
-        <p style="text-align: center; font-size: 1.2em;">Vorbereitung auf Klausur Nr. 2 (E-Phase)</p>
-        <p>Dieses Skript erklärt alles ausführlich, damit du nicht nur auswendig lernst, sondern es verstehst.</p>
-
-        <!-- TEIL 0: GRUNDLAGEN -->
-        <h2>0. Der Grundlagen-Check</h2>
-        <p>Hier scheitern die meisten Fehler, nicht am neuen Stoff. Deshalb schauen wir uns das genau an.</p>
-
-        <h3>Quadratische Gleichungen (pq-Formel)</h3>
-        <p>Du nutzt die pq-Formel, wenn du wissen willst, welches <span class="math">x</span> eine quadratische Gleichung löst (also Null ergibt). Die Struktur muss immer so aussehen: <strong>Ein x², ein x und eine Zahl.</strong></p>
-        
-        <div class="achtung">
-            <strong>Die Goldene Regel:</strong><br>
-            Vor dem <span class="math">x²</span> darf <strong>keine Zahl</strong> stehen (außer einer unsichtbaren 1).<br>
-            Beispiel: <span class="math">2x² + 8x + 6 = 0</span> darfst du NICHT sofort in die Formel einsetzen.<br>
-            &rarr; Erst alles durch 2 teilen! &rarr; <span class="math">x² + 4x + 3 = 0</span>.
-        </div>
-
-        <div class="math-block">
-Formel für: x² + px + q = 0
-
-x₁,₂ = -(p/2) ± √((p/2)² - q)
-
-Rechenbeispiel (p=4, q=3):
-x₁,₂ = -(4/2) ± √((4/2)² - 3)
-     = -2     ± √(4 - 3)
-     = -2     ± 1
-x₁ = -1, x₂ = -3
-        </div>
-
-        <h3>Ausklammern (Faktorisieren)</h3>
-        <p>Wenn du einen Term hast wie <span class="math">3x² + 9x</span>, dann siehst du, dass in beiden Teilen etwas Ähnliches steckt. Das ist wie bei LEGO-Steinen:</p>
-        <ul>
-            <li>In <span class="math">3x²</span> steckt eine 3 und zwei x.</li>
-            <li>In <span class="math">9x</span> steckt eine 9 (also 3·3) und ein x.</li>
-            <li><strong>Gemeinsamkeit:</strong> Beide haben eine 3 und ein x. Das ziehen wir nach vorne ("vor die Klammer").</li>
-            <li><span class="math">3x · ( ... + ... )</span> &rarr; Was bleibt übrig? Ein x beim ersten, eine 3 beim zweiten. &rarr; <span class="math">3x(x + 3)</span></li>
-        </ul>
-
-        <!-- TEIL 1: GANZRATIONALE FUNKTIONEN -->
-        <h2>1. Ganzrationale Funktionen</h2>
-
-        <h3>Was bedeuten die Begriffe?</h3>
-        <p>Eine Funktion ist ein Bauplan: <span class="math">f(x) = 2x³ - 4x + 5</span>.</p>
-        <ul>
-            <li><strong>Koeffizienten:</strong> Das sind einfach die "Vorfaktoren", also die Zahlen, die VOR den x stehen (hier 2 und -4). Sie entscheiden, wie steil oder flach die Kurve ist.</li>
-            <li><strong>Grad der Funktion:</strong> Das ist der "Ranghöchste". Schau dir alle Hochzahlen an. Die größte Zahl gewinnt. Hier ist es die <strong>3</strong>. Der Grad bestimmt grob, wie die Funktion aussieht (wie ein S oder wie eine Parabel).</li>
-            <li><strong>Absolutes Glied:</strong> Die Zahl ganz ohne x (hier +5). Das ist immer der Punkt, wo die y-Achse geschnitten wird, weil wenn x=0 ist, bleibt nur diese Zahl übrig.</li>
-        </ul>
-
-        <h3>Symmetrie (Warum das mit den Hochzahlen funktioniert)</h3>
-        <p>Warum reicht es, die Hochzahlen anzuschauen?</p>
-        <ul>
-            <li><strong>Achsensymmetrie (Spiegel):</strong> Wenn du <span class="math">-2</span> quadrierst (<span class="math">(-2)²</span>), kommt 4 raus. Genauso wie bei <span class="math">2²</span>. Das Minus verschwindet bei geraden Hochzahlen. Deshalb sieht die linke Seite des Graphen genauso aus wie die rechte. <br>&rarr; <strong>Nur gerade Exponenten.</strong></li>
-            
-            <li><strong>Punktsymmetrie (Drehen):</strong> Wenn du <span class="math">-2</span> hoch 3 nimmst (<span class="math">(-2)³</span>), kommt <span class="math">-8</span> raus. Das Vorzeichen dreht sich um. Der Punkt springt also von rechts oben nach links unten.<br>&rarr; <strong>Nur ungerade Exponenten.</strong></li>
-        </ul>
-
-        <h3>Limes (Verhalten im Unendlichen)</h3>
-        <p>Die Frage ist simpel: <strong>Wenn ich auf der x-Achse immer weiter nach rechts laufe (gegen unendlich), geht mein Graph dann in den Himmel oder in den Keller?</strong></p>
-        
-        <div class="box">
-            <h4>Die Schreibweise entschlüsselt</h4>
-            <div class="math-block" style="text-align: center;">
-lim  f(x)
-x→∞
+    <!-- Navigation -->
+    <nav class="bg-slate-800 text-white p-4 shadow-md sticky top-0 z-50 no-print">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <div>
+                <h1 class="text-xl font-bold"><i class="fas fa-graduation-cap mr-2 text-yellow-400"></i>Wirtschafts-Klausur (Detail)</h1>
+                <p class="text-xs text-slate-300">Alles was du wissen musst</p>
             </div>
-            <p>Das liest man so:</p>
-            <ol>
-                <li><strong>x &rarr; &infin;</strong>: "Ich gehe nach rechts..."</li>
-                <li><strong>lim f(x)</strong>: "...wo ist mein y-Wert am Ende?"</li>
-            </ol>
-            <p><strong>Der Trick:</strong> Ignoriere alle kleinen Terme. Bei <span class="math">-2x³ + 100x</span> gewinnt am Ende immer die höchste Potenz (<span class="math">x³</span>). Setze im Kopf "eine Million" für x ein. Wenn das Ergebnis positiv ist &rarr; <span class="math">+&infin;</span>. Wenn negativ &rarr; <span class="math">-&infin;</span>.</p>
+            <button onclick="window.print()" class="bg-yellow-500 hover:bg-yellow-600 text-slate-900 px-5 py-2 rounded-lg font-bold shadow transition-colors flex items-center">
+                <i class="fas fa-print mr-2"></i> Drucken / PDF
+            </button>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto p-6 space-y-8">
+
+        <!-- Druck-Header -->
+        <div class="hidden print:block text-center mb-8 border-b-2 border-gray-300 pb-4">
+            <h1 class="text-4xl font-bold text-gray-900 mb-2">Lernzusammenfassung Wirtschaft</h1>
+            <p class="text-gray-600 text-lg">Detaillierte Übersicht aller Themenbereiche</p>
         </div>
 
-        <h2>2. Nullstellen berechnen (Die Entscheidungs-Hilfe)</h2>
-        <p>Viele wissen in der Klausur nicht, <em>wie</em> sie anfangen sollen. Hier ist dein Entscheidungsbaum:</p>
+        <!-- THEMA 1: BEDÜRFNISSE -->
+        <section class="bg-white rounded-xl shadow-md overflow-hidden border-t-4 border-blue-600">
+            <div class="p-6">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center border-b pb-2">
+                    <span class="bg-blue-100 text-blue-600 w-12 h-12 flex items-center justify-center rounded-full mr-4 text-xl shadow-sm">1</span>
+                    Bedürfnisse, Bedarf & Nachfrage
+                </h2>
 
-        <div class="tipp">
-            Schau dir die Gleichung an und frage dich:
-        </div>
+                <!-- Der Prozess -->
+                <div class="bg-blue-50 p-5 rounded-lg border border-blue-100 mb-8">
+                    <h3 class="font-bold text-blue-800 mb-3"><i class="fas fa-sync-alt mr-2"></i>Der Kauf-Prozess</h3>
+                    <div class="flex flex-col md:flex-row justify-between items-center text-center gap-4">
+                        <div class="flex-1">
+                            <div class="font-bold text-lg">1. Bedürfnis</div>
+                            <div class="text-sm text-gray-600">Allgemeines Mangelgefühl + Wunsch es zu beseitigen.</div>
+                            <div class="text-xs italic mt-1 text-blue-600">"Ich habe Hunger"</div>
+                        </div>
+                        <div class="text-2xl text-blue-300"><i class="fas fa-arrow-right"></i></div>
+                        <div class="flex-1">
+                            <div class="font-bold text-lg">2. Bedarf</div>
+                            <div class="text-sm text-gray-600">Bedürfnis + <strong>Kaufkraft</strong> (Geld). Der konkrete Wunsch wird realisierbar.</div>
+                            <div class="text-xs italic mt-1 text-blue-600">"Ich habe 5€ für einen Döner"</div>
+                        </div>
+                        <div class="text-2xl text-blue-300"><i class="fas fa-arrow-right"></i></div>
+                        <div class="flex-1">
+                            <div class="font-bold text-lg">3. Nachfrage</div>
+                            <div class="text-sm text-gray-600">Bedarf wird am Markt wirksam. Der Kauf wird getätigt.</div>
+                            <div class="text-xs italic mt-1 text-blue-600">"Ich kaufe den Döner am Stand"</div>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="box">
-            <h4>Fall 1: Steht in JEDEM Teil ein x?</h4>
-            <p>Beispiel: <span class="math">x³ - 4x = 0</span> (Keine reine Zahl am Ende!)</p>
-            <p><strong>Lösung: Ausklammern!</strong></p>
-            <p>Du ziehst x raus: <span class="math">x · (x² - 4) = 0</span>. <br>
-            Warum hilft das? Weil ein Produkt immer dann Null ist, wenn <strong>einer</strong> der Faktoren Null ist (Satz vom Nullprodukt).<br>
-            Das erste x liefert sofort: <strong>x₁ = 0</strong>.<br>
-            Die Klammer liefert den Rest: <span class="math">x² - 4 = 0</span> &rarr; <span class="math">x² = 4</span> &rarr; 2 und -2.</p>
-        </div>
+                <!-- Einteilung der Bedürfnisse -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-bold text-lg mb-3 border-l-4 border-blue-400 pl-3">Nach Dringlichkeit</h3>
+                        <ul class="space-y-3">
+                            <li class="bg-gray-50 p-3 rounded hover:shadow-md transition">
+                                <strong class="text-gray-800 block">1. Existenzbedürfnisse</strong>
+                                <span class="text-sm text-gray-600">Lebensnotwendig. Müssen zuerst befriedigt werden.</span>
+                                <div class="text-xs text-blue-500 mt-1"><i class="fas fa-tag mr-1"></i> Essen, Trinken, Kleidung, Wohnung</div>
+                            </li>
+                            <li class="bg-gray-50 p-3 rounded hover:shadow-md transition">
+                                <strong class="text-gray-800 block">2. Kulturbedürfnisse</strong>
+                                <span class="text-sm text-gray-600">Entstehen durch das Leben in einer Gemeinschaft/Kultur. Nicht lebensnotwendig, aber "normal".</span>
+                                <div class="text-xs text-blue-500 mt-1"><i class="fas fa-tag mr-1"></i> Kino, Bildung, Reisen, Bücher</div>
+                            </li>
+                            <li class="bg-gray-50 p-3 rounded hover:shadow-md transition">
+                                <strong class="text-gray-800 block">3. Luxusbedürfnisse</strong>
+                                <span class="text-sm text-gray-600">Verzichtbare Wünsche nach gehobenen Gütern. Nur mit hohem Einkommen erfüllbar.</span>
+                                <div class="text-xs text-blue-500 mt-1"><i class="fas fa-tag mr-1"></i> Sportwagen, Villa, Yacht</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-3 border-l-4 border-blue-400 pl-3">Nach Bereitstellung</h3>
+                        <ul class="space-y-3">
+                            <li class="bg-gray-50 p-3 rounded hover:shadow-md transition">
+                                <strong class="text-gray-800 block">Individualbedürfnisse</strong>
+                                <span class="text-sm text-gray-600">Können vom Einzelnen selbst befriedigt werden.</span>
+                                <div class="text-xs text-blue-500 mt-1"><i class="fas fa-user mr-1"></i> Ich kaufe mir ein Brötchen.</div>
+                            </li>
+                            <li class="bg-gray-50 p-3 rounded hover:shadow-md transition">
+                                <strong class="text-gray-800 block">Kollektivbedürfnisse</strong>
+                                <span class="text-sm text-gray-600">Können nur von der Gemeinschaft (Staat) befriedigt werden. Entstehen, weil viele Menschen zusammenleben.</span>
+                                <div class="text-xs text-blue-500 mt-1"><i class="fas fa-users mr-1"></i> Straßenbau, Innere Sicherheit (Polizei), Schulen.</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <div class="box">
-            <h4>Fall 2: Gibt es nur x⁴, x² und eine Zahl?</h4>
-            <p>Beispiel: <span class="math">x⁴ - 10x² + 9 = 0</span> (Kein x³ oder x!)</p>
-            <p><strong>Lösung: Substitution (Der Verräter-Trick)</strong></p>
-            <p>Wir "verkleiden" das <span class="math">x²</span> als <span class="math">z</span>. Dann wird aus <span class="math">x⁴</span> automatisch <span class="math">z²</span>.<br>
-            Neue Gleichung: <span class="math">z² - 10z + 9 = 0</span>.<br>
-            Das lösen wir einfach mit der pq-Formel. Am Ende haben wir Werte für z (z.B. z=9). Da wir aber x wissen wollen und <span class="math">x² = z</span> war, müssen wir die Wurzel ziehen: <span class="math">x = √9</span>.</p>
-        </div>
+        <!-- THEMA 2: MASLOW -->
+        <section class="bg-white rounded-xl shadow-md overflow-hidden border-t-4 border-yellow-500 page-break">
+            <div class="p-6">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center border-b pb-2">
+                    <span class="bg-yellow-100 text-yellow-600 w-12 h-12 flex items-center justify-center rounded-full mr-4 text-xl shadow-sm">2</span>
+                    Die Bedürfnispyramide (Maslow)
+                </h2>
+                
+                <div class="flex flex-col md:flex-row gap-8">
+                    <!-- Die Pyramide -->
+                    <div class="w-full md:w-1/2 flex flex-col justify-end space-y-1">
+                        <div class="text-xs text-center text-gray-400 mb-1">Oben (Spitze)</div>
+                        
+                        <!-- Stufe 5 -->
+                        <div class="bg-purple-600 text-white p-2 rounded text-center shadow-lg transform hover:scale-105 transition w-4/12 mx-auto">
+                            <div class="font-bold text-sm">5. Selbstverwirklichung</div>
+                        </div>
+                        
+                        <!-- Stufe 4 -->
+                        <div class="bg-red-500 text-white p-3 rounded text-center shadow-lg transform hover:scale-105 transition w-6/12 mx-auto">
+                            <div class="font-bold">4. Ich-Bedürfnisse</div>
+                            <div class="text-xs opacity-90">(Wertschätzung)</div>
+                        </div>
+                        
+                        <!-- Stufe 3 -->
+                        <div class="bg-yellow-500 text-white p-4 rounded text-center shadow-lg transform hover:scale-105 transition w-8/12 mx-auto">
+                            <div class="font-bold">3. Soziale Bedürfnisse</div>
+                        </div>
+                        
+                        <!-- Stufe 2 -->
+                        <div class="bg-green-600 text-white p-5 rounded text-center shadow-lg transform hover:scale-105 transition w-10/12 mx-auto">
+                            <div class="font-bold">2. Sicherheitsbedürfnisse</div>
+                        </div>
+                        
+                        <!-- Stufe 1 -->
+                        <div class="bg-blue-600 text-white p-6 rounded text-center shadow-lg transform hover:scale-105 transition w-full">
+                            <div class="font-bold">1. Physiologische Bedürfnisse</div>
+                            <div class="text-xs opacity-90">(Grundbedürfnisse)</div>
+                        </div>
+                        <div class="text-xs text-center text-gray-400 mt-1">Unten (Basis)</div>
+                    </div>
 
-        <!-- TEIL 2: ÄNDERUNGSRATEN & NEW REGEL -->
-        <h2>3. Ableitung & Die NEW-Regel</h2>
-        <p>Das ist der wichtigste Teil der Analysis. Verstehe den Unterschied:</p>
-        <ul>
-            <li><strong>Die Funktion f(x)</strong> gibt dir die <strong>Höhe</strong> an (y-Wert).</li>
-            <li><strong>Die Ableitung f'(x)</strong> gibt dir die <strong>Steigung</strong> an (wie steil ist es dort?).</li>
-        </ul>
+                    <!-- Die Erklärung -->
+                    <div class="w-full md:w-1/2 space-y-4">
+                        <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">
+                            <h3 class="font-bold mb-2">Die Wachstumsbedürfnisse (Stufe 5)</h3>
+                            <p class="text-sm text-gray-600">Diese Bedürfnisse sind <strong>nie vollständig erfüllbar</strong>. Man will sich immer weiterentwickeln.</p>
+                            <p class="text-sm mt-2"><em>Bsp: Kunst, Religion, Hobby perfektionieren.</em></p>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-gray-800">
+                            <h3 class="font-bold mb-2">Die Defizitbedürfnisse (Stufe 1-4)</h3>
+                            <p class="text-sm text-gray-600">Diese Bedürfnisse <strong>müssen</strong> erfüllt sein, sonst empfindet der Mensch einen Mangel (Defizit). Wenn sie erfüllt sind, ist man erst mal zufrieden.</p>
+                            <ul class="text-sm mt-2 list-disc list-inside space-y-1">
+                                <li><strong>Stufe 4:</strong> Anerkennung, Macht, Status, Titel.</li>
+                                <li><strong>Stufe 3:</strong> Liebe, Freundschaft, Teamzugehörigkeit.</li>
+                                <li><strong>Stufe 2:</strong> Fester Job, Versicherungen, Gesetz & Ordnung, Dach über dem Kopf.</li>
+                                <li><strong>Stufe 1:</strong> Essen, Trinken, Schlaf, Wärme.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <div class="box" style="border-left: 5px solid var(--primary);">
-            <h3>Die NEW-Regel (Graphen verstehen)</h3>
-            <p>Diese Regel hilft dir, wenn du den Graphen von <span class="math">f</span> siehst und den Graphen der Ableitung <span class="math">f'</span> zeichnen oder verstehen sollst.</p>
-            
-            <p><strong>Das Schema:</strong></p>
-            <table class="new-table">
-                <tr>
-                    <td>Bei <strong>f</strong> schauen wir auf:</td>
-                    <td><span class="new-letter">E</span></td>
-                    <td><strong>xtremstellen</strong> (Hoch-/Tiefpunkte)</td>
-                </tr>
-                <tr>
-                    <td>Bei <strong>f'</strong> werden das zu:</td>
-                    <td><span class="new-letter">N</span></td>
-                    <td><strong>ullstellen</strong> (Schnittpunkte mit x-Achse)</td>
-                </tr>
-            </table>
-            
-            <p style="margin-top:20px;"><strong>Die Wanderer-Logik (Erklärung):</strong><br>
-            Stell dir vor, du wanderst auf dem Graphen von f von links nach rechts.</p>
-            
-            <ol>
-                <li>
-                    <strong>Du gehst bergauf (Graph f steigt)</strong><br>
-                    Da es bergauf geht, ist die Steigung positiv. <br>
-                    &rarr; Das bedeutet: Der Graph der Ableitung <span class="math">f'</span> muss im <strong>positiven Bereich</strong> (über der x-Achse) verlaufen.
-                </li>
-                <li>
-                    <strong>Du erreichst den Gipfel (Hochpunkt von f)</strong><br>
-                    Ganz oben auf der Spitze ist es für einen kurzen Moment flach. Die Steigung ist Null.<br>
-                    &rarr; Das bedeutet: Der Graph der Ableitung <span class="math">f'</span> muss hier <strong>genau auf der x-Achse</strong> liegen (Nullstelle).
-                </li>
-                <li>
-                    <strong>Du gehst bergab (Graph f fällt)</strong><br>
-                    Jetzt geht es runter, die Steigung ist negativ.<br>
-                    &rarr; Das bedeutet: Der Graph der Ableitung <span class="math">f'</span> muss im <strong>negativen Bereich</strong> (unter der x-Achse) verlaufen.
-                </li>
-                <li>
-                    <strong>Du erreichst das Tal (Tiefpunkt von f)</strong><br>
-                    Ganz unten ist es wieder kurz flach. Steigung ist Null.<br>
-                    &rarr; Das bedeutet: Der Graph der Ableitung <span class="math">f'</span> schneidet hier wieder die x-Achse (Nullstelle).
-                </li>
-            </ol>
-        </div>
+        <!-- THEMA 3: GÜTERARTEN -->
+        <section class="bg-white rounded-xl shadow-md overflow-hidden border-t-4 border-green-600 page-break">
+            <div class="p-6">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center border-b pb-2">
+                    <span class="bg-green-100 text-green-600 w-12 h-12 flex items-center justify-center rounded-full mr-4 text-xl shadow-sm">3</span>
+                    Güterarten
+                </h2>
 
-        <h3>Unterschied: Mittlere vs. Momentane Änderung</h3>
-        <p>Ein letztes wichtiges Konzept:</p>
-        
-        <p><strong>1. Mittlere Änderungsrate (Sekante):</strong></p>
-        <p>Das ist wie deine <strong>Durchschnittsgeschwindigkeit</strong> auf einer Fahrt nach Berlin. Es interessiert nicht, ob du im Stau standest oder gerast bist. Es zählt nur: Wann losgefahren? Wann angekommen? Wie weit weg?<br>
-        Formel: <span class="math">y₂ - y₁</span> geteilt durch <span class="math">x₂ - x₁</span>. Du brauchst also immer <strong>zwei Punkte</strong>.</p>
+                <div class="mb-6">
+                    <h3 class="font-bold text-lg mb-2">Grundunterscheidung: Verfügbarkeit</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-green-50 p-4 rounded border border-green-200">
+                            <strong class="text-green-800">Freie Güter</strong>
+                            <p class="text-sm mt-1">Im Überfluss vorhanden, haben keinen Preis, werden nicht produziert.</p>
+                            <div class="mt-2 text-xs font-bold text-green-600">Beispiel: Sonnenlicht, Meerwasser, Luft.</div>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded border border-gray-300">
+                            <strong class="text-gray-800">Wirtschaftliche Güter</strong>
+                            <p class="text-sm mt-1">Sind <strong>knapp</strong>, haben einen Preis, Herstellung verursacht Kosten.</p>
+                            <div class="mt-2 text-xs font-bold text-gray-600">Beispiel: Autos, Lebensmittel, Strom.</div>
+                        </div>
+                    </div>
+                </div>
 
-        <p><strong>2. Momentane Änderungsrate (Tangente):</strong></p>
-        <p>Das ist der Blick auf den <strong>Tacho</strong> genau in diesem Moment. Wie schnell ändert sich die Funktion *jetzt gerade*?<br>
-        Dafür brauchst du die <strong>Ableitung</strong>. Du setzt den einen Punkt (x-Wert) in f'(x) ein.</p>
+                <h3 class="font-bold text-lg mb-4 mt-8">Einteilung der Wirtschaftlichen Güter</h3>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-600 border rounded-lg">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+                            <tr>
+                                <th class="px-6 py-3 rounded-tl-lg">Kriterium</th>
+                                <th class="px-6 py-3">Art 1</th>
+                                <th class="px-6 py-3 rounded-tr-lg">Art 2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b hover:bg-gray-50">
+                                <td class="px-6 py-4 font-bold text-gray-900">Beschaffenheit</td>
+                                <td class="px-6 py-4">
+                                    <strong>Sachgüter (Materiell)</strong><br>
+                                    Körperliche Gegenstände.<br>
+                                    <em>(Stuhl, Maschine)</em>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <strong>Immaterielle Güter</strong><br>
+                                    Nicht anfassbar.<br>
+                                    <em>(Dienstleistungen, Rechte/Patente)</em>
+                                </td>
+                            </tr>
+                            <tr class="bg-white border-b hover:bg-gray-50">
+                                <td class="px-6 py-4 font-bold text-gray-900">Verwendung</td>
+                                <td class="px-6 py-4">
+                                    <strong>Konsumgüter</strong><br>
+                                    Dienen dem privaten Haushalt.<br>
+                                    <em>(Privat-PKW, Nahrung)</em>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <strong>Produktionsgüter (Investitionsgüter)</strong><br>
+                                    Dienen Unternehmen zur Herstellung.<br>
+                                    <em>(Fabrikhalle, Firmen-LKW, Rohstoffe)</em>
+                                </td>
+                            </tr>
+                            <tr class="bg-white border-b hover:bg-gray-50">
+                                <td class="px-6 py-4 font-bold text-gray-900">Nutzungsdauer</td>
+                                <td class="px-6 py-4">
+                                    <strong>Gebrauchsgüter</strong><br>
+                                    Mehrmalige Nutzung.<br>
+                                    <em>(Werkzeug, Kleidung)</em>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <strong>Verbrauchsgüter</strong><br>
+                                    Einmalige Nutzung (gehen unter).<br>
+                                    <em>(Benzin, Essen, Strom)</em>
+                                </td>
+                            </tr>
+                            <tr class="bg-white hover:bg-gray-50">
+                                <td class="px-6 py-4 font-bold text-gray-900">Beziehung</td>
+                                <td class="px-6 py-4">
+                                    <strong>Substitutionsgüter</strong><br>
+                                    Ersetzen sich gegenseitig.<br>
+                                    <em>(Butter ↔ Margarine)</em>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <strong>Komplementärgüter</strong><br>
+                                    Ergänzen sich (brauchen einander).<br>
+                                    <em>(Auto + Benzin, Drucker + Patrone)</em>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
 
-        <h2>4. Trainingslager (Rechenweg erklärt)</h2>
+        <!-- THEMA 4: ÖKONOMISCHES PRINZIP -->
+        <section class="bg-white rounded-xl shadow-md overflow-hidden border-t-4 border-indigo-600 page-break">
+            <div class="p-6">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center border-b pb-2">
+                    <span class="bg-indigo-100 text-indigo-600 w-12 h-12 flex items-center justify-center rounded-full mr-4 text-xl shadow-sm">4</span>
+                    Ökonomisches Prinzip
+                </h2>
+                <p class="mb-6 text-gray-600">Auch "Wirtschaftlichkeitsprinzip" genannt. Da Güter knapp sind, müssen wir rational handeln.</p>
 
-        <h3>Aufgabe: Pilz-Wachstum</h3>
-        <p>Höhe eines Pilzes: <span class="math">h(t) = -0,5t² + 4t</span>.</p>
-        
-        <div class="math-block">
-Frage 1: Wann ist der Pilz wieder weg (Höhe 0)?
-Ansatz: h(t) = 0
--0,5t² + 4t = 0
-Wir sehen: In beiden Teilen steckt ein t. Also: Ausklammern!
+                <div class="space-y-6">
+                    <!-- Maximalprinzip -->
+                    <div class="flex flex-col md:flex-row bg-indigo-50 rounded-lg overflow-hidden border border-indigo-100">
+                        <div class="bg-indigo-600 text-white p-4 flex items-center justify-center md:w-48">
+                            <h3 class="text-xl font-bold">Maximal-<br>prinzip</h3>
+                        </div>
+                        <div class="p-4 flex-1">
+                            <div class="font-mono text-xs text-indigo-500 mb-1">GEGEBEN: MITTEL  &rarr;  GESUCHT: ERFOLG</div>
+                            <p class="font-bold text-gray-800">Mit fest gegebenen Mitteln den größtmöglichen (maximalen) Erfolg erzielen.</p>
+                            <div class="mt-3 text-sm bg-white p-2 rounded border-l-4 border-indigo-400">
+                                <strong>Beispiel:</strong> Du hast genau <strong>50 Liter Benzin</strong> im Tank (Mittel fest) und willst damit <strong>so weit wie möglich fahren</strong> (Ziel maximal).
+                            </div>
+                        </div>
+                    </div>
 
-t · (-0,5t + 4) = 0
+                    <!-- Minimalprinzip -->
+                    <div class="flex flex-col md:flex-row bg-indigo-50 rounded-lg overflow-hidden border border-indigo-100">
+                        <div class="bg-indigo-800 text-white p-4 flex items-center justify-center md:w-48">
+                            <h3 class="text-xl font-bold">Minimal-<br>prinzip</h3>
+                        </div>
+                        <div class="p-4 flex-1">
+                            <div class="font-mono text-xs text-indigo-500 mb-1">GEGEBEN: ZIEL  &rarr;  GESUCHT: MITTEL</div>
+                            <p class="font-bold text-gray-800">Ein festes Ziel mit möglichst geringem (minimalem) Mitteleinsatz erreichen.</p>
+                            <div class="mt-3 text-sm bg-white p-2 rounded border-l-4 border-indigo-800">
+                                <strong>Beispiel:</strong> Du willst nach <strong>Berlin fahren</strong> (Ziel fest) und dabei <strong>so wenig Benzin wie möglich</strong> verbrauchen (Mittel minimal).
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-Wegen "Satz vom Nullprodukt" gibt es zwei Wege:
-1. Weg: Das t vorne ist 0. -> t₁ = 0 (Startzeitpunkt)
-2. Weg: Die Klammer ist 0. -> -0,5t + 4 = 0
-    Wir rechnen +0,5t  -> 4 = 0,5t
-    Wir teilen durch 0,5 -> 8 = t
+                <!-- Achtung Hinweis -->
+                <div class="mt-6 bg-yellow-50 p-4 rounded-lg border border-yellow-200 flex items-start">
+                    <i class="fas fa-exclamation-triangle text-yellow-500 mt-1 mr-3"></i>
+                    <div>
+                        <strong class="text-yellow-800">Wichtiger Fehlerhinweis:</strong>
+                        <p class="text-sm text-yellow-700">Man kann <strong>nie</strong> beides gleichzeitig optimieren! "Mit minimalem Aufwand das Maximale erreichen" ist logisch unmöglich (Das nennt man das "Min-Max-Theorem", es funktioniert in der Realität nicht).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-Antwort: Nach 8 Tagen ist die Höhe wieder 0.
-        </div>
+        <!-- THEMA 5: OPPORTUNITÄTSKOSTEN -->
+        <section class="bg-white rounded-xl shadow-md overflow-hidden border-t-4 border-red-500 page-break">
+            <div class="p-6">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center border-b pb-2">
+                    <span class="bg-red-100 text-red-600 w-12 h-12 flex items-center justify-center rounded-full mr-4 text-xl shadow-sm">5</span>
+                    Opportunitätskosten
+                </h2>
 
-        <div class="math-block">
-Frage 2: Was bedeutet (h(3) - h(1)) / 2 ?
+                <div class="bg-red-50 p-6 rounded-xl border border-red-100 mb-6">
+                    <h3 class="text-xl font-bold text-red-800 mb-2">Definition</h3>
+                    <p class="text-gray-700 font-medium">Opportunitätskosten sind der entgangene Nutzen der <u>besten</u> nicht gewählten Alternative.</p>
+                    <p class="text-sm text-gray-600 mt-2">Sie heißen auch <strong>Verzichtskosten</strong> oder <strong>Alternativkosten</strong>. Es geht nicht immer um Geld, sondern oft um Zeit, Spaß oder Nutzen.</p>
+                </div>
 
-Analyse: 
-- Oben steht eine Differenz von y-Werten (Höhe bei Tag 3 minus Höhe bei Tag 1).
-- Unten steht eine 2. Das ist genau der Zeitabstand (3 minus 1).
-- Es ist also die Formel (y₂-y₁) / (x₂-x₁).
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Beispiel 1 -->
+                    <div class="border rounded-lg p-4 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-gray-200 px-2 py-1 text-xs font-bold rounded-bl-lg">Alltag</div>
+                        <h4 class="font-bold mb-2">Szenario: Kino vs. Arbeit</h4>
+                        <ul class="text-sm space-y-2">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i><strong>Wahl:</strong> Du gehst ins Kino (Kosten: 15€ Ticket).</li>
+                            <li><i class="fas fa-times text-red-500 mr-2"></i><strong>Verzicht:</strong> Du hättest in der Zeit Babysitten können (20€ Lohn).</li>
+                        </ul>
+                        <div class="mt-3 bg-red-100 p-2 rounded text-xs text-red-800 font-bold">
+                            Opportunitätskosten = 20€ (entgangener Lohn) + 15€ (Ausgabe)
+                        </div>
+                    </div>
 
-Das ist der DIFFERENZENQUOTIENT.
-Er gibt die DURCHSCHNITTLICHE Wachstumsgeschwindigkeit an.
-Antwort: "Der Pilz ist von Tag 1 bis Tag 3 durchschnittlich X cm pro Tag gewachsen."
-        </div>
+                    <!-- Beispiel 2 -->
+                    <div class="border rounded-lg p-4 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-gray-200 px-2 py-1 text-xs font-bold rounded-bl-lg">Wirtschaft</div>
+                        <h4 class="font-bold mb-2">Szenario: Investition</h4>
+                        <ul class="text-sm space-y-2">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i><strong>Wahl:</strong> Ein Unternehmer kauft eine neue Maschine für 100.000€.</li>
+                            <li><i class="fas fa-times text-red-500 mr-2"></i><strong>Verzicht:</strong> Er hätte das Geld auf der Bank anlegen können (3% Zinsen).</li>
+                        </ul>
+                        <div class="mt-3 bg-red-100 p-2 rounded text-xs text-red-800 font-bold">
+                            Opportunitätskosten = 3.000€ (entgangene Zinsen)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    </div>
+        <!-- Footer -->
+        <footer class="text-center text-gray-500 text-sm mt-12 mb-8 no-print">
+            <p class="font-bold">Du schaffst das! 🚀</p>
+            <p class="mt-2">Erstellt für deine Wirtschaftsklausur.</p>
+        </footer>
+
+    </main>
 
 </body>
 </html>
